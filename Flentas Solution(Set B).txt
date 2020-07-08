@@ -1,0 +1,46 @@
+// Minimum cost problemb
+#include <bits/stdc++.h> 
+using namespace std; 
+  
+#define ll long long int 
+  
+int minCost(ll price[], int n) 
+{ 
+   
+    sort(price, price + n); 
+    ll totalCost = 0; 
+  
+
+    for (int i = n - 1; i > 1; i = i - 2) { 
+        if (i == 2) { 
+            totalCost = totalCost + price[2] + price[0]; 
+        } 
+        else { 
+  
+            ll price_first = price[i] + price[0] + 2 * price[1]; 
+            ll price_second = price[i] + price[i - 1] + 2 * price[0]; 
+            totalCost = totalCost + min(price_first, price_second); 
+        } 
+    } 
+  
+  
+    if (n == 1) { 
+        totalCost = totalCost + price[0]; 
+    } 
+    else { 
+        totalCost = totalCost + price[1]; 
+    } 
+  
+    return totalCost; 
+} 
+  
+ 
+int main() 
+{ 
+    ll price[] = { 30, 40, 60, 70 }; 
+    int n = sizeof(price) / sizeof(price[0]); 
+  
+    cout << minCost(price, n); 
+  
+    return 0; 
+}
